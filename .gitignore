@@ -1,0 +1,10 @@
+*.mp4
+*.pt
+
+
+# cache
+__pycache__
+
+# outputs
+
+outputs/

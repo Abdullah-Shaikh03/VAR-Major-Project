@@ -1,0 +1,95 @@
+# soccer.yaml - Configuration for Soccer Offside Detection System
+
+# Dataset Paths
+path: ../datasets/soccer  # Path to dataset root directory
+train: images/train       # Relative path to training images
+val: images/val           # Relative path to validation images
+test: images/test         # Relative path to test images
+
+# Class Names
+names:
+  0: player
+  1: ball
+  2: referee
+  3: goalkeeper
+  4: field_markings
+
+# Dataset Statistics
+nc: 5                     # Number of classes
+img_size: 1280            # Default image size for training
+batch_size: 16            # Batch size
+workers: 8                # Number of data loader workers
+
+# Training Parameters
+lr0: 0.01                 # Initial learning rate
+lrf: 0.1                  # Final learning rate (lr0 * lrf)
+momentum: 0.937           # SGD momentum
+weight_decay: 0.0005      # Optimizer weight decay
+warmup_epochs: 3.0        # Warmup epochs
+warmup_momentum: 0.8      # Warmup initial momentum
+warmup_bias_lr: 0.1       # Warmup initial bias lr
+
+# Augmentation Parameters
+hsv_h: 0.015              # Image HSV-Hue augmentation (fraction)
+hsv_s: 0.7                # Image HSV-Saturation augmentation (fraction)
+hsv_v: 0.4                # Image HSV-Value augmentation (fraction)
+degrees: 5.0              # Image rotation (+/- deg)
+translate: 0.1            # Image translation (+/- fraction)
+scale: 0.5                # Image scale (+/- gain)
+shear: 0.0                # Image shear (+/- deg)
+perspective: 0.0005       # Image perspective (+/- fraction)
+flipud: 0.0               # Image flip up-down (probability)
+fliplr: 0.5               # Image flip left-right (probability)
+mosaic: 1.0               # Image mosaic (probability)
+mixup: 0.0                # Image mixup (probability)
+
+# Anchor Configuration
+anchors:
+  - [10,13, 16,30, 33,23]    # P3/8
+  - [30,61, 62,45, 59,119]   # P4/16
+  - [116,90, 156,198, 373,326] # P5/32
+
+# Special Classes (for offside detection)
+special_classes:
+  offside_critical:
+    - player                 # Regular players
+    - goalkeeper             # Goalkeepers (for second-last defender determination)
+  
+  ball_related:
+    - ball                   # The soccer ball
+    
+  ignore_classes:
+    - referee                # Referees don't affect offside
+    - field_markings         # Field lines are for perspective only
+
+# Evaluation Metrics
+metrics:
+  iou_threshold: 0.5        # IoU threshold for mAP calculation
+  conf_threshold: 0.25      # Confidence threshold
+  max_det: 300              # Maximum detections per image
+
+# Offside-Specific Parameters
+offside:
+  min_player_height: 80     # Minimum pixel height for player detection
+  max_players_per_frame: 30 # Maximum players expected in one frame
+  ball_confidence: 0.7      # Minimum confidence for ball detection
+  team_classification:
+    n_clusters: 3           # Team A, Team B, Referees
+    samples_per_player: 10  # Color samples per player for team classification
+
+# Visualization Settings
+visualization:
+  bbox_thickness: 1         # Bounding box thickness
+  team_colors:              # Colors for different teams/classes
+    team_a: [255, 0, 0]     # Red
+    team_b: [0, 0, 255]     # Blue
+    referee: [0, 255, 255]  # Yellow
+    ball: [0, 255, 0]       # Green
+  offside_line_color: [255, 255, 0] # Yellow for offside line
+  alpha: 0.3                # Transparency for overlays
+
+# Logging
+log:
+  train: runs/train         # Training logs directory
+  val: runs/val             # Validation logs directory
+  interval: 100             # Log interval in iterations

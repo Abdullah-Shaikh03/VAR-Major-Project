@@ -108,7 +108,7 @@ class PlayerDetector:
     Detects and tracks players in video frames using YOLOv8.
     """
 
-    def __init__(self, model_path: str = 'yolov8x.pt', device: str = 'cuda',
+    def __init__(self, model_path: str = 'yolo11n.pt', device: str = 'cuda',
                  conf_threshold: float = 0.25, track: bool = True):
         """
         Initialize the player detector.
@@ -122,7 +122,7 @@ class PlayerDetector:
         # Check if model exists, download if not
         if not os.path.exists(model_path):
             print(f"Model not found at {model_path}, downloading YOLOv8...")
-            self.model = YOLO('yolov8x.pt')
+            self.model = YOLO('yolo11n.pt')
         else:
             self.model = YOLO(model_path)
 

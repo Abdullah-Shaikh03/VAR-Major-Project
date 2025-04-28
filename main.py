@@ -21,7 +21,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Soccer Offside Detection System')
     parser.add_argument('--video_path', type=str, required=True, help='Path to input video file')
     parser.add_argument('--output_dir', type=str, default='outputs', help='Directory to save outputs')
-    parser.add_argument('--model_path', type=str, default='models/yolov8x.pt', help='Path to YOLOv8 model')
+    parser.add_argument('--model_path', type=str, default='models/yolo11n.pt', help='Path to YOLOv8 model')
     parser.add_argument('--ground_truth', type=str, default=None, help='Path to ground truth annotations (if available)')
     parser.add_argument('--visualize', action='store_true', help='Enable visualization')
     parser.add_argument('--save_video', action='store_true', help='Save output video')

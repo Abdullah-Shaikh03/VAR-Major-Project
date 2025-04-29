@@ -8,7 +8,10 @@ __pycache__
 # outputs
 
 outputs/
-*.crdownload
-Unconfirmed 441213.crdownload
 archive
 *.zip
+
+runs/**
+
+
+yolo_dataset

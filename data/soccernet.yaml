@@ -3,6 +3,6 @@ names:
 - team_right
 - ball
 nc: 3
-path: ./dataset
-train: ./dataset\train
-val: ./dataset\test
+path: C:\Users\Abdul\Desktop\Abdullah\VAR-Major-Project\yolo_dataset
+train: C:\Users\Abdul\Desktop\Abdullah\VAR-Major-Project\yolo_dataset\images\train
+val: C:\Users\Abdul\Desktop\Abdullah\VAR-Major-Project\yolo_dataset\images\val
